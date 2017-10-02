@@ -1,6 +1,7 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const commonHooks = require('feathers-hooks-common');
 const createGame = require('../../hooks/create-game');
+const updateGame = require('../../hooks/update-game');
 
 const playerSchema = {
   include: {
@@ -11,14 +12,15 @@ const playerSchema = {
   }
 };
 
+
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
     find: [],
     get: [],
     create: [createGame()],
-    update: [],
-    patch: [],
+    update: [updateGame()],
+    patch: [updateGame()],
     remove: []
   },
 
