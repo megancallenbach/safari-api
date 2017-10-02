@@ -1,11 +1,13 @@
 const { authenticate } = require('feathers-authentication').hooks;
 
+const createGame = require('../../hooks/create-game');
+
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
     find: [],
     get: [],
-    create: [],
+    create: [createGame()],
     update: [],
     patch: [],
     remove: []
