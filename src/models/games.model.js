@@ -4,16 +4,9 @@
 // for more of what you can do here.
 
 class GameClass {
-  hasTurn(user) {
-    return !!user; // TODO
-  }
 
   checkGuess(user, guess) {
     return !!user && !!guess; // TODO
-  }
-
-  nextPlayerIndex() {
-    return 1; // TODO
   }
 
   isNotJoinableBy(user) {
@@ -33,27 +26,42 @@ class GameClass {
   }
 
   isFull() {
-    return this.playerIds.length >= 2;
+    return this.playerIds.length > 3;
   }
 
   isStarted() {
-    return this.guesses.length > 0;
+    return this.started;
   }
 }
 
+
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
+  const { Schema } = mongooseClient;
+
+  const imageSchema = new Schema({
+    imageSrc: { type: String, required: true },
+    word: { type: String, required: true },
+  });
+
+  const guessSchema = new Schema({
+    playerId: { type: mongooseClient.Schema.Types.ObjectId, ref: 'users' },
+    guess: { type: String }
+  });
+
 
   const games = new mongooseClient.Schema({
     title: { type: String, required: true },
-    word: { type: String, required: true },
-    guesses: [String],
-    currentPlayerIndex: { type: Number, default: 0 },
-    playerIds: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
+    started: { type: Boolean },
+    time: { type: Number },
+    round: { type: Number },
+    players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
+    image: imageSchema,
+    guesses: [guessSchema],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
 
-  mongooseClient.loadClass(GameClass);
+  games.loadClass(GameClass);
   return mongooseClient.model('games', games);
 };

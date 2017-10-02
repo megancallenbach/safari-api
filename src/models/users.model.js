@@ -5,9 +5,12 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const users = new mongooseClient.Schema({
-    name: { type: String, required: true },
+    username: { type: String, required: true },
     email: { type: String, unique: true },
     password: { type: String },
+    score: { type: Number },
+    ready: { type: Boolean },
+    gamesWon: { type: Number },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
