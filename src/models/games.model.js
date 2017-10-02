@@ -9,7 +9,7 @@ module.exports = function (app) {
     title: { type: String, required: true },
     word: { type: String, required: true },
     guesses: [String],
-    players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
+    playerIds: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
