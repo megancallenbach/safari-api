@@ -8,7 +8,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       started: false,
       image: { imageSrc: 'https://static.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg', word: 'hedgehog'},
       guesses: [],
-      playerIds: [hook.params.user._id]
+      players: [hook.params.user._id]
     };
 
     return Promise.resolve(hook);
