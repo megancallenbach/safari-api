@@ -49,6 +49,10 @@ module.exports = function (app) {
     guess: { type: String }
   });
 
+  const scoreSchema = new Schema({
+    playerId: { type: mongooseClient.Schema.Types.ObjectId, ref: 'users' },
+    score: { type: Number }
+  });
 
   const games = new mongooseClient.Schema({
     title: { type: String, required: true },
@@ -56,6 +60,7 @@ module.exports = function (app) {
     time: { type: Number },
     round: { type: Number },
     players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
+    scores: [scoreSchema],
     image: imageSchema,
     guesses: [guessSchema],
     createdAt: { type: Date, default: Date.now },
