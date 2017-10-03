@@ -28,19 +28,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
               throw new errors.Forbidden('You are not a player in this game, sorry!');
             }
 
-            if (!game.hasTurn(user)) {
-              throw new errors.Forbidden('It\'s not your turn. Whoops!');
-            }
-
-            const guessRight = game.checkGuess(user, payload);
+            // const guessRight = game.checkGuess(user, payload);
+            // if (guessRight) user.score = game.time;
 
             hook.data = {
-              guesses: game.guesses.concat(payload),
+              guesses: game.guesses.concat({playerId: user._id, guess: payload}),
             };
-
-            if (!guessRight) {
-              hook.data.currentPlayerIndex = game.nextPlayerIndex();
-            }
 
             return hook;
           }

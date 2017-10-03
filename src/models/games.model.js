@@ -6,7 +6,7 @@
 class GameClass {
 
   checkGuess(user, guess) {
-    return !!user && !!guess; // TODO
+    return (guess === this.image.word)? true : false;
   }
 
   isNotJoinableBy(user) {
@@ -26,7 +26,7 @@ class GameClass {
   }
 
   isFull() {
-    return this.playerIds.length > 3;
+    return this.playerIds.length > 5;
   }
 
   isStarted() {
@@ -55,7 +55,7 @@ module.exports = function (app) {
     started: { type: Boolean },
     time: { type: Number },
     round: { type: Number },
-    players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
+    playerIds: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     image: imageSchema,
     guesses: [guessSchema],
     createdAt: { type: Date, default: Date.now },
