@@ -8,7 +8,6 @@ module.exports = function (app) {
     name: { type: String, required: true },
     email: { type: String, unique: true },
     password: { type: String },
-    score: { type: Number },
     ready: { type: Boolean },
     gamesWon: { type: Number },
     createdAt: { type: Date, default: Date.now },
