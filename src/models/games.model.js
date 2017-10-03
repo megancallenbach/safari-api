@@ -45,7 +45,7 @@ module.exports = function (app) {
   });
 
   const guessSchema = new Schema({
-    playerId: { type: mongooseClient.Schema.Types.ObjectId, ref: 'users' },
+    player: { type: mongooseClient.Schema.Types.ObjectId, ref: 'users' },
     guess: { type: String }
   });
 
@@ -59,7 +59,7 @@ module.exports = function (app) {
     started: { type: Boolean },
     time: { type: Number },
     round: { type: Number },
-    playerIds: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
+    players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     scores: [scoreSchema],
     image: imageSchema,
     guesses: [guessSchema],
