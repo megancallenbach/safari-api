@@ -2,6 +2,7 @@ const errors = require('feathers-errors');
 
 const JOIN_GAME = 'JOIN_GAME';
 const GUESS = 'GUESS';
+const ADD_GUESS = 'ADD_GUESS';
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function joinGame (hook) {
@@ -43,6 +44,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             }
 
             return hook;
+          }
+
+          case ADD_GUESS : {
+            hook.data = {
+              guesses: game.guesses.push(payload)
+            };
           }
 
           default :
