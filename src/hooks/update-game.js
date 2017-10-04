@@ -5,7 +5,7 @@ const GUESS = 'GUESS';
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function joinGame (hook) {
-    hook.app.service('games').get(hook.id)
+    return hook.app.service('games').get(hook.id)
       .then((game) => {
         const { type, payload } = hook.data;
         const { user } = hook.params;
@@ -24,16 +24,18 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
           }
 
           case GUESS : {
-            if (!game.hasJoined(user)) {
-              throw new errors.Forbidden('You are not a player in this game, sorry!');
-            }
+            hook.data = { '$push': { guesses: payload } };
+            // console.log(hook);
+            // if (!game.hasJoined(user)) {
+            //   throw new errors.Forbidden('You are not a player in this game, sorry!');
+            // }
 
             // const guessRight = game.checkGuess(user, payload);
             // if (guessRight) user.score = game.time;
-
-            hook.data = {
-              guesses: game.guesses.concat({playerId: user._id, guess: payload}),
-            };
+            //
+            // hook.data = {
+            //   guesses: game.guesses.concat({playerId: user._id, guess: payload}),
+            // };
 
             return hook;
           }
