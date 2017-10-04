@@ -18,7 +18,7 @@ class GameClass {
   }
 
   hasJoined(user) {
-    this.playerIds.includes(user._id);
+    this.players.includes(user._id);
   }
 
   isJoinable() {
@@ -26,7 +26,7 @@ class GameClass {
   }
 
   isFull() {
-    return this.playerIds.length > 5;
+    return this.players.length > 2;
   }
 
   isStarted() {

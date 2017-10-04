@@ -1,4 +1,4 @@
-const errors = require('feathers-errors');
+// const errors = require('feathers-errors');
 
 const JOIN_GAME = 'JOIN_GAME';
 const GUESS = 'GUESS';
@@ -12,14 +12,13 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
         switch(type) {
           case JOIN_GAME : {
-            if (game.isNotJoinableBy(user)) {
-              throw new errors.Forbidden('This game is no longer joinable!');
-            }
+            // if (game.isNotJoinableBy(user)) {
+            //   throw new errors.Forbidden('This game is no longer joinable!');
+            // }
 
             hook.data = {
-              playerIds: game.playerIds.concat(user._id)
+              players: game.players.concat(user._id)
             };
-
             return hook;
           }
 
