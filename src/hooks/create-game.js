@@ -10,7 +10,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       guesses: [],
       players: [hook.params.user._id]
     };
-
+    console.log(hook.data);
+    console.log(hook.params);
+    console.log(hook);
     return Promise.resolve(hook);
   };
 };
