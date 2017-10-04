@@ -39,11 +39,6 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
 
-  const imageSchema = new Schema({
-    imageSrc: { type: String, required: true },
-    word: { type: String, required: true },
-  });
-
   const guessSchema = new Schema({
     player: { type: mongooseClient.Schema.Types.ObjectId, ref: 'users' },
     guess: { type: String }
@@ -61,7 +56,7 @@ module.exports = function (app) {
     round: { type: Number },
     players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     scores: [scoreSchema],
-    image: imageSchema,
+    animal: { type: String, required: true },
     guesses: [guessSchema],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
