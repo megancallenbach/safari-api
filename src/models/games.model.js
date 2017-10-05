@@ -56,7 +56,7 @@ module.exports = function (app) {
     round: { type: Number },
     players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     scores: [scoreSchema],
-    animal: { type: String, required: true },
+    animals: [{ type: String, required: true }],
     guesses: [guessSchema],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
