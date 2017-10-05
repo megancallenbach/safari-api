@@ -1,7 +1,8 @@
-// const errors = require('feathers-errors');
+const errors = require('feathers-errors');
 
 const JOIN_GAME = 'JOIN_GAME';
 const GUESS = 'GUESS';
+const START = 'START';
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function joinGame (hook) {
@@ -12,9 +13,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
         switch(type) {
           case JOIN_GAME : {
-            // if (game.isNotJoinableBy(user)) {
-            //   throw new errors.Forbidden('This game is no longer joinable!');
-            // }
+            if (game.isNotJoinableBy(user)) {
+              throw new errors.Forbidden('This game is no longer joinable!');
+            }
 
             hook.data = {
               players: game.players.concat(user._id)
@@ -23,6 +24,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
           }
 
           case GUESS : {
+
             hook.data = { '$push': { guesses: payload } };
             // console.log(hook);
             // if (!game.hasJoined(user)) {
@@ -35,13 +37,18 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             // hook.data = {
             //   guesses: game.guesses.concat({playerId: user._id, guess: payload}),
             // };
+            return hook;
+          }
 
+
+          case START: {
+            
             return hook;
           }
 
           default :
             return Promise.resolve(hook);
-        }
+          }
       });
   };
 };

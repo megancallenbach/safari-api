@@ -3,36 +3,7 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 
-class GameClass {
-
-  checkGuess(user, guess) {
-    return (guess === this.image.word)? true : false;
-  }
-
-  isNotJoinableBy(user) {
-    return !this.isJoinableBy(user);
-  }
-
-  isJoinableBy(user) {
-    return this.isJoinable() && !this.hasJoined(user);
-  }
-
-  hasJoined(user) {
-    this.players.includes(user._id);
-  }
-
-  isJoinable() {
-    return !this.isFull() && !this.isStarted();
-  }
-
-  isFull() {
-    return this.players.length > 2;
-  }
-
-  isStarted() {
-    return this.started;
-  }
-}
+const GameClass =  require('./games.class');
 
 
 module.exports = function (app) {
@@ -56,6 +27,7 @@ module.exports = function (app) {
     round: { type: Number },
     players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     scores: [scoreSchema],
+    winnerId: { type: Schema.Types.ObjectId, ref: 'users' },
     animal: { type: String, required: true },
     guesses: [guessSchema],
     createdAt: { type: Date, default: Date.now },
