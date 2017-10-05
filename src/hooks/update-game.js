@@ -16,14 +16,21 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
               throw new errors.Forbidden('This game is no longer joinable!');
             }
 
+            // if (game.startGame()) {
+            //   hook.data = {
+            //     started: true
+            //   };
+            // }
+
             hook.data = {
-              playerIds: game.playerIds.concat(user._id)
+              players: game.playerIds.concat(user._id),
             };
 
             return hook;
           }
 
           case GUESS : {
+
             hook.data = { '$push': { guesses: payload } };
             // console.log(hook);
             // if (!game.hasJoined(user)) {

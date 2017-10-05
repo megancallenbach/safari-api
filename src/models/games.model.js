@@ -5,9 +5,14 @@
 
 class GameClass {
 
-  checkGuess(user, guess) {
-    return (guess === this.image.word)? true : false;
+  startGame() {
+    if (this.players.length > 1) return true;
+    return false;
   }
+
+  // checkGuess(user, guess) {
+  //   // return (guess === this.image.word)? true : false;
+  // }
 
   isNotJoinableBy(user) {
     return !this.isJoinableBy(user);
@@ -18,7 +23,7 @@ class GameClass {
   }
 
   hasJoined(user) {
-    this.playerIds.includes(user._id);
+    this.players.includes(user._id);
   }
 
   isJoinable() {
@@ -26,7 +31,7 @@ class GameClass {
   }
 
   isFull() {
-    return this.playerIds.length > 5;
+    return this.players.length > 5;
   }
 
   isStarted() {
@@ -53,7 +58,7 @@ module.exports = function (app) {
     title: { type: String, required: true },
     started: { type: Boolean },
     time: { type: Number },
-    round: { type: Number },
+    // round: { type: Number },
     players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     scores: [scoreSchema],
     animal: { type: String, required: true },
