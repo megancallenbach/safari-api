@@ -16,9 +16,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             //   throw new errors.Forbidden('This game is no longer joinable!');
             // }
 
-            hook.data = {
-              players: game.players.concat(user._id)
-            };
+            hook.data = { '$addToSet': { playerIds: user._id } };
             return hook;
           }
 

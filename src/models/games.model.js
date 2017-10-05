@@ -18,7 +18,7 @@ class GameClass {
   }
 
   hasJoined(user) {
-    this.players.includes(user._id);
+    this.playerIds.includes(user._id);
   }
 
   isJoinable() {
@@ -26,7 +26,7 @@ class GameClass {
   }
 
   isFull() {
-    return this.players.length > 2;
+    return this.playerIds.length > 2;
   }
 
   isStarted() {
@@ -54,7 +54,7 @@ module.exports = function (app) {
     started: { type: Boolean },
     time: { type: Number },
     round: { type: Number },
-    players: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
+    playerIds: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     scores: [scoreSchema],
     animal: { type: String, required: true },
     guesses: [guessSchema],
