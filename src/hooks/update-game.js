@@ -31,7 +31,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             const allReadyPlayers = game.readyPlayers.concat(user._id).map(comparableObjectId);
             const allPlayers = game.playerIds.map(comparableObjectId);
 
-              if (allReadyPlayers.sort().join(',') === allPlayers.sort().join(',')) {
+              if (allReadyPlayers.length > 1 && allReadyPlayers.sort().join(',') === allPlayers.sort().join(',')) {
                 hook.data = { readyPlayers: game.readyPlayers.concat(user._id),
                               started: true };
                 return hook;
