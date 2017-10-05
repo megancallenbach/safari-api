@@ -57,6 +57,7 @@ module.exports = function (app) {
     playerIds: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'users' }],
     scores: [scoreSchema],
     animal: { type: String },
+    winner: {type: Schema.Types.ObjectId, ref: 'users'},
     guesses: [guessSchema],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

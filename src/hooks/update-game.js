@@ -22,6 +22,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
           case GUESS : {
             hook.data = { '$push': { guesses: payload } };
+            if (payload.guess === game.animal) {
+              hook.data = {
+                winner: payload.player,
+              };
+            }
+
             // console.log(hook);
             // if (!game.hasJoined(user)) {
             //   throw new errors.Forbidden('You are not a player in this game, sorry!');
