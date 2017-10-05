@@ -13,6 +13,9 @@ const playersSchema = {
 };
 
 
+const fixPlayerArray = require('../../hooks/fix-player-array');
+
+
 module.exports = {
   before: {
     // all: [ authenticate('jwt') ],
@@ -26,13 +29,10 @@ module.exports = {
   },
 
   after: {
-    all: [
-      commonHooks.populate({ schema: playersSchema }),
-      commonHooks.when(
-        hook => hook.params.provider,
-        commonHooks.discard('image')
-      )
-    ],
+    all: [commonHooks.populate({ schema: playersSchema }), commonHooks.when(
+      hook => hook.params.provider,
+      commonHooks.discard('image')
+    ), fixPlayerArray()],
     find: [],
     get: [],
     create: [],
