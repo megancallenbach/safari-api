@@ -58,6 +58,7 @@ module.exports = function (app) {
     scores: [scoreSchema],
     animal: { type: String },
     guesses: [guessSchema],
+    readyPlayers: [{ type: Schema.Types.ObjectId, ref: 'users'}],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
