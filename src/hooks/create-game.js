@@ -8,7 +8,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     function randomAnimal(){
       var animals = ['dog', 'cat', 'panda'];
       var randomAnimal = animals[Math.floor(Math.random()*animals.length)];
-      console.log(randomAnimal);
       return randomAnimal;
     }
 
@@ -18,7 +17,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       time: 25,
       animal: randomAnimal(),
       guesses: [],
-      playerIds: []
+      playerIds: [],
+      readyPlayers: []
     };
     return Promise.resolve(hook);
   };

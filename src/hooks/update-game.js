@@ -2,6 +2,13 @@
 
 const JOIN_GAME = 'JOIN_GAME';
 const GUESS = 'GUESS';
+const START_GAME = 'START_GAME';
+
+
+function comparableObjectId(objectId) {
+  return objectId.toString();
+}
+
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function joinGame (hook) {
@@ -18,6 +25,21 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
             hook.data = { '$addToSet': { playerIds: user._id } };
             return hook;
+          }
+
+          case START_GAME : {
+            const allReadyPlayers = game.readyPlayers.concat(user._id).map(comparableObjectId);
+            const allPlayers = game.playerIds.map(comparableObjectId);
+
+              if (allReadyPlayers.sort().join(',') === allPlayers.sort().join(',')) {
+                hook.data = { readyPlayers: game.readyPlayers.concat(user._id),
+                              started: true };
+                return hook;
+              }
+              else {
+                hook.data = { '$addToSet': { readyPlayers: user._id } };
+                return hook;
+              }
           }
 
           case GUESS : {
