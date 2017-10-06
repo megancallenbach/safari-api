@@ -4,6 +4,7 @@ const JOIN_GAME = 'JOIN_GAME';
 const GUESS = 'GUESS';
 const START_GAME = 'START_GAME';
 const END_GAME = 'END_GAME';
+const PLAY_AGAIN = 'PLAY_AGAIN';
 
 function comparableObjectId(objectId) {
   return objectId.toString();
@@ -16,6 +17,20 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       .then((game) => {
         const { type, payload } = hook.data;
         const { user } = hook.params;
+
+        function randomAnimal(){
+          var animals = ['dog', 'cat', 'panda'];
+          var randomAnimal = animals[Math.floor(Math.random()*animals.length)];
+          return randomAnimal;
+        }
+
+        function newAnimal(previousAnimal){
+          var newAnimal = randomAnimal();
+
+          if (newAnimal !== previousAnimal){
+            return newAnimal;
+          } else { newAnimal(previousAnimal); }
+        }
 
         switch(type) {
           case JOIN_GAME : {
@@ -67,6 +82,22 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             // hook.data = {
             //   guesses: game.guesses.concat({playerId: user._id, guess: payload}),
             // };
+
+            return hook;
+          }
+
+          case PLAY_AGAIN : {
+
+            var previousAnimal = hook.data.animal;
+
+            hook.data = {
+              started: false,
+              ended: false,
+              time: 25,
+              animal: newAnimal(previousAnimal),
+              readyPlayers: [],
+              guesses: []
+            };
 
             return hook;
           }
