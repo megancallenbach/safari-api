@@ -11,14 +11,16 @@ const restrict = [
   })
 ];
 
+const addWin = require('../../hooks/add-win');
+
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ ...restrict ],
     create: [ hashPassword() ],
-    update: [ ...restrict, hashPassword() ],
-    patch: [ ...restrict, hashPassword() ],
+    update: [...restrict, hashPassword(), addWin()],
+    patch: [...restrict, hashPassword(), addWin()],
     remove: [ ...restrict ]
   },
 

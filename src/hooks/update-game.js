@@ -63,9 +63,11 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
           case GUESS : {
             hook.data = { '$push': { guesses: payload } };
+
             if (payload.guess === game.animal) {
               hook.data = {
                 winner: payload.player,
+                winnerId: user._id,
                 ended: true,
               };
             }
