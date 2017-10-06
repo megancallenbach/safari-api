@@ -19,9 +19,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
         switch(type) {
           case JOIN_GAME : {
-            // if (game.isNotJoinableBy(user)) {
-            //   throw new errors.Forbidden('This game is no longer joinable!');
-            // }
 
             hook.data = { '$addToSet': { playerIds: user._id } };
             return hook;
@@ -53,20 +50,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             if (payload.guess === game.animal) {
               hook.data = {
                 winner: payload.player,
+                ended: true,
               };
             }
-
-            // console.log(hook);
-            // if (!game.hasJoined(user)) {
-            //   throw new errors.Forbidden('You are not a player in this game, sorry!');
-            // }
-
-            // const guessRight = game.checkGuess(user, payload);
-            // if (guessRight) user.score = game.time;
-            //
-            // hook.data = {
-            //   guesses: game.guesses.concat({playerId: user._id, guess: payload}),
-            // };
 
             return hook;
           }

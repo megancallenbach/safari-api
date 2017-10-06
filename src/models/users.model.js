@@ -9,7 +9,7 @@ module.exports = function (app) {
     email: { type: String, unique: true },
     password: { type: String },
     ready: { type: Boolean },
-    gamesWon: { type: Number },
+    gamesWon: { type: Number, default: 0, required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
