@@ -56,7 +56,10 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
           }
 
           case END_GAME : {
-            hook.data = { ended: true };
+            hook.data = {
+              ended: true,
+              winner: null 
+            };
 
             return hook;
           }
