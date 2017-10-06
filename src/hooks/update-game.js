@@ -47,6 +47,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             if (payload.guess === game.animal) {
               hook.data = {
                 winner: payload.player,
+                gameWon: true,
               };
             }
 
