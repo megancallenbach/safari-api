@@ -5,6 +5,7 @@ const GUESS = 'GUESS';
 const START_GAME = 'START_GAME';
 const END_GAME = 'END_GAME';
 const PLAY_AGAIN = 'PLAY_AGAIN';
+const LEAVE_GAME = 'LEAVE_GAME';
 
 function comparableObjectId(objectId) {
   return objectId.toString();
@@ -88,15 +89,29 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
           case PLAY_AGAIN : {
 
-            var previousAnimal = hook.data.animal;
+            hook.data = {
+              started: false,
+              ended: false,
+              animal: newAnimal(hook.data.animal),
+              readyPlayers: [],
+              guesses: []
+            };
+
+            return hook;
+          }
+
+          case LEAVE_GAME : {
+            var oldPlayers = game.playerIds.map(comparableObjectId);
+            var currentPlayer = hook.params.user._id.toString();
+            var newPlayers = oldPlayers.filter(player => player !== currentPlayer);
 
             hook.data = {
               started: false,
               ended: false,
-              time: 25,
-              animal: newAnimal(previousAnimal),
+              animal: newAnimal(hook.data.animal),
               readyPlayers: [],
-              guesses: []
+              guesses: [],
+              playerIds: newPlayers,
             };
 
             return hook;
