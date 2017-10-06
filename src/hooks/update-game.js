@@ -20,7 +20,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const { user } = hook.params;
 
         function randomAnimal(){
-          var animals = ['dog', 'cat', 'panda'];
+          var animals = ['dog', 'cat', 'panda', 'penguin', 'hedgehog', 'giraffe', 'lion'];
           var randomAnimal = animals[Math.floor(Math.random()*animals.length)];
           return randomAnimal;
         }
