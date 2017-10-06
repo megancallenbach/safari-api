@@ -3,7 +3,7 @@
 const JOIN_GAME = 'JOIN_GAME';
 const GUESS = 'GUESS';
 const START_GAME = 'START_GAME';
-
+const END_GAME = 'END_GAME';
 
 function comparableObjectId(objectId) {
   return objectId.toString();
@@ -40,6 +40,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
                 hook.data = { '$addToSet': { readyPlayers: user._id } };
                 return hook;
               }
+          }
+
+          case END_GAME : {
+            hook.data = { ended: true };
+
+            return hook;
           }
 
           case GUESS : {

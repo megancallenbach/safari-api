@@ -14,6 +14,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     hook.data = {
       title: `${hook.params.user.name}'s Game`,
       started: false,
+      ended: false,
       time: 25,
       animal: randomAnimal(),
       guesses: [],
