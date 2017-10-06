@@ -67,7 +67,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
               hook.data = {
                 winner: payload.player,
                 ended: true,
-                started: false,
               };
             }
 
