@@ -1,8 +1,10 @@
-# games-api-b9
+# Real Time Game: Animal Safari
 
 > 
 
 ## About
+Animal Safari is a real-time multiplayer game, where you have to guess what animal is displayed before the timer runs out. Every 5 seconds the image deblurs. 
+This repository consists of the backend API. The client side application can be found on [Animal Safari](https://github.com/shakahari/animal-safari).
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
@@ -14,7 +16,9 @@ Getting up and running is as easy as 1, 2, 3.
 2. Install your dependencies
 
     ```
-    cd path/to/games-api-b9; npm install
+    git clone https://github.com/megancallenbach/safari-api.git
+    cd safari-api
+    npm install
     ```
 
 3. Start your app
@@ -22,10 +26,6 @@ Getting up and running is as easy as 1, 2, 3.
     ```
     npm start
     ```
-
-## Testing
-
-Simply run `npm test` and all your tests in the `test/` directory will be run.
 
 ## Scaffolding
 
@@ -52,6 +52,6 @@ __0.1.0__
 
 ## License
 
-Copyright (c) 2016
+Copyright (c) 2017
 
 Licensed under the [MIT license](LICENSE).
