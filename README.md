@@ -4,7 +4,7 @@
 
 ## About
 Animal Safari is a real-time multiplayer game, where you have to guess what animal is displayed before the timer runs out. Every 5 seconds the image deblurs. 
-This repository consists of the backend API. The client side application can be found on [Animal Safari](https://github.com/shakahari/animal-safari).
+This repository consists of the backend API. The client side application can be found here: [Animal Safari](https://github.com/shakahari/animal-safari).
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
